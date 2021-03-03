@@ -1,58 +1,67 @@
 import React, { useState, useEffect } from "react"
-import ArticleDetails from "../Components/ArticleDetails";
+import ArticleList from "./ArticleList";
 
 
 const NewsContainer = () => {
 
     const [articleIds, setArticleIds] = useState([]);
 
-    const [allArticles, setAllArticles] = useState([]);
+    // const [allArticles, setAllArticles] = useState([]);
+
+    // let newsNodes = []
 
     useEffect(() => {
         getArticleIds();
     }, [])
 
+    // useEffect(() => {
+    //     getAllArticles()
+    // }, [articleIds])
+
+    // useEffect(() => {
+    //     newsNodes = createNewsNodes()
+    // }, [allArticles])
+
     const getArticleIds = () => {
         fetch("https://hacker-news.firebaseio.com/v0/topstories.json")
             .then(res => res.json())
             .then(data => setArticleIds(data))
-            .catch(err => console.error)
-            //TODO
-            .then(getAllArticles())
-            
-                
+            .catch(err => console.error)            
     }
 
-    const getAllArticles = () => {
-        for(let id in articleIds){
-            fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
-            .then(res => res.json())
-            .then(data => setAllArticles(...allArticles, data))
-            .catch(err => console.error);
-        }
-    }
 
-    const newsNodes = articleIds.slice([0], [10]).map((id) => {
-        return(
-            <li>
-            <ArticleDetails
-            articleId={id}
-            key={id}
-            />
-            </li>
-            
-        )
-    })
+    // const getAllArticles = () => {
+        
+    //     const articleList = []
+    //     for(let id in articleIds.slice){
+    //         fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
+    //         .then(res => res.json())
+    //         .then(data => articleList.push(data))
+    //         .catch(err => console.error);
+    //     }
+    //     setAllArticles(articleList)
+    // }
+
+    // const createNewsNodes = () => {
+
+        // return(
+        //  allArticles.map((article, index) => {
+        //     return(
+        //         <li>
+        //         <ArticleDetails
+        //         article={article}
+        //         key={index}
+        //         />
+        //         </li> 
+        //     )}
+        //  ))}
 
     return ( 
         <>
         <p>News</p>
-        <ul>
-        {newsNodes}
-        </ul>
+        <ArticleList articleIds = {articleIds}></ArticleList>
         </>
     )
 }
-
 
 export default NewsContainer

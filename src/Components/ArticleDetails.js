@@ -1,29 +1,22 @@
 import React, { useState, useEffect } from 'react';
 
-const ArticleDetails = ({articleId}) => {
+const ArticleDetails = ({title, url}) => {
 
-    const [articleDetails, setArticleDetails] = useState([])
-
-
-    const getArticleDetails = () => {
-        fetch(`https://hacker-news.firebaseio.com/v0/item/${articleId}.json`)
-        .then(res => res.json())
-        .then(data => setArticleDetails(data))
-        .catch(err => console.error);
-    }
-
-    useEffect(() => {
-        getArticleDetails();
-    })
-
+    if (title != null){
     return(
         <>
+        
         <h3>
-        <a href={articleDetails.url}>{articleDetails.title}</a>
+        <a href={url}>{title}</a>
         </h3>
+        <p>Article</p>
 
 
         </>
+    )
+    }
+    return(
+        <p>Article not found</p>
     )
     
 }
