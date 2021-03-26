@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# React Front End Hacker News Lab
+
+React based filterable front-end using HackerNews API
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
